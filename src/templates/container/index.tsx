@@ -1,5 +1,6 @@
 import Presencas from '../../components/Presencas';
 import Modal from '../../components/Modal';
+import Footer from '../../components/Footer';
 import {useNavigate} from "react-router"
 import './styles.css'
 import { useContext, useState } from 'react';
@@ -42,9 +43,7 @@ export default function Container({ children }: ContainerProps) {
             <div className="container-children">
                 {children}
             </div>
-            <footer className="container-footer">
-                <p>Todos os direitos reservados</p>
-            </footer>
+            <Footer texto="Todos os direitos reservados" />
 
             <Modal modalIsOpen={visibleModal} closeModal={() => { setVisibleModal(false) }}>
                 <h3 className="modal-titulo">Lista de presença</h3>

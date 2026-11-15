@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { PRESENCA_KEY } from "../utils/storageKeys"
 
 interface ItemProps {
     id: number,
@@ -12,16 +11,11 @@ interface PresencaState {
     items: ItemProps[]
 }
 
-function loadPresencas(): ItemProps[] {
-    const dataStorageString = localStorage.getItem(PRESENCA_KEY)
-    return dataStorageString ? JSON.parse(dataStorageString) : []
-}
-
 const initialState: PresencaState = {
-    items: loadPresencas()
+    items: []
 }
 
-const presencaSlice = createSlice({
+export const presencaSlice = createSlice({
     name: "presenca",
     initialState,
     reducers: {
@@ -29,7 +23,7 @@ const presencaSlice = createSlice({
             state.items = [...state.items, action.payload]
         },
         updatePresenca: (state, action: PayloadAction<ItemProps>) => {
-            state.items = state.items.map((item) => item.id === action.payload.id ? { ...item, ...action.payload } : item)
+            state.items = state.items.map((item) => item.id === action.payload.id ? action.payload : item)
         },
         removePresenca: (state, action: PayloadAction<number>) => {
             state.items = state.items.filter((item) => item.id !== action.payload)

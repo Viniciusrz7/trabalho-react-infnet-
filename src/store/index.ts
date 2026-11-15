@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
 import presencaReducer from "./presencaSlice"
-import { PRESENCA_KEY } from "../utils/storageKeys"
 
 export const store = configureStore({
     reducer: {
@@ -8,9 +7,4 @@ export const store = configureStore({
     }
 })
 
-store.subscribe(() => {
-    localStorage.setItem(PRESENCA_KEY, JSON.stringify(store.getState().presenca.items))
-})
-
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
