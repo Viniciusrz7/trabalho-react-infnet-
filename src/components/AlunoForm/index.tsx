@@ -68,15 +68,13 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
                 slotProps={{ inputLabel: { shrink: true } }} {...register("nome")} />
             <TextField label="E-mail" size="small" error={Boolean(errors.email)} helperText={errors.email?.message}
                 slotProps={{ inputLabel: { shrink: true } }} {...register("email")} />
-            <div className="aluno-form-linha">
-                <TextField label="Telefone" size="small" fullWidth error={Boolean(errors.telefone)} helperText={errors.telefone?.message}
-                    slotProps={{ inputLabel: { shrink: true } }} {...register("telefone")} />
-                <TextField select label="Curso" size="small" fullWidth error={Boolean(errors.curso)} helperText={errors.curso?.message}
-                    slotProps={{ select: { native: true }, inputLabel: { shrink: true } }} {...register("curso")}>
-                    <option value="">Selecione um curso</option>
-                    {cursos.map((curso) => <option key={curso.id} value={curso.nome}>{curso.nome}</option>)}
-                </TextField>
-            </div>
+            <TextField select label="Curso" size="small" error={Boolean(errors.curso)} helperText={errors.curso?.message}
+                slotProps={{ select: { native: true }, inputLabel: { shrink: true } }} {...register("curso")}>
+                <option value="">Selecione um curso</option>
+                {cursos.map((curso) => <option key={curso.id} value={curso.nome}>{curso.nome}</option>)}
+            </TextField>
+            <TextField label="Telefone" size="small" error={Boolean(errors.telefone)} helperText={errors.telefone?.message}
+                slotProps={{ inputLabel: { shrink: true } }} {...register("telefone")} />
             <TextField label="CEP" size="small" error={Boolean(errors.cep)}
                 helperText={errors.cep ? errors.cep.message : "Digite o CEP para preencher o endereço"}
                 slotProps={{ inputLabel: { shrink: true } }} {...register("cep", { onChange: (evento) => buscarEndereco(evento.target.value) })} />
