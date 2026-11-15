@@ -1,0 +1,33 @@
+.home-filtro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.home-filtro input,
+.home-filtro select {
+    height: 38px;
+    padding: 7px;
+    border: 1px solid #878787;
+    border-radius: 4px;
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+}
+
+.home-filtro input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.home-carregando {
+    display: flex;
+    justify-content: center;
+    padding: 32px;
+}
+
+.home-total {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--cor-suave);
+}
