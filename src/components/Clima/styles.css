@@ -11,7 +11,7 @@
 
 .clima-icone {
     font-size: 2rem;
-    color: #f9CA24;
+    color: var(--cor-destaque);
 }
 
 .clima-titulo {

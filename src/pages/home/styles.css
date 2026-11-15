@@ -59,7 +59,9 @@
     height: 50px;
     border-radius: 50%;
     font-size: 24px;
-    background-color: #f9CA24;
-    border: 1px solid #ccc;
+    background-color: #0f766e;
+    color: #fff;
+    border: 0;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }

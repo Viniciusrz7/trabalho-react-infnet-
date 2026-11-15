@@ -1,9 +1,10 @@
 .container-content{
-    --cor-fundo: rgb(241, 237, 244);
+    --cor-fundo: #f1f5f4;
     --cor-texto: #000;
     --cor-card: #fff;
     --cor-borda: #e9e9e9;
     --cor-suave: #6b6b6b;
+    --cor-destaque: #0f766e;
 
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
@@ -18,6 +19,7 @@
     --cor-card: #2b2b36;
     --cor-borda: #44444f;
     --cor-suave: #b5b5b5;
+    --cor-destaque: #2dd4bf;
     color-scheme: dark;
 }
 
@@ -29,12 +31,12 @@
 
 .container-header {
     display: flex;
-    background-color: #f9CA24;
-    color: #000;
+    background-color: #0f766e;
+    color: #fff;
     justify-content: space-between;
     align-items: center;
     padding: 10px 16px;
-    box-shadow: 0px 10px 15px -3px #000000;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
 
 }
 

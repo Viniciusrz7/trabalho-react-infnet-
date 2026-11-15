@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f9CA24;
+    background: linear-gradient(135deg, #0f766e, #134e4a);
 }
 
 .not-found-card {
@@ -14,9 +14,10 @@
     color: #000;
     width: 35%;
     min-width: 280px;
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 24px;
     text-align: center;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .not-found-card h1 {
@@ -29,7 +30,8 @@
     border: 0;
     border-radius: 4px;
     margin-top: 10px;
-    background-color: #f9CA24;
+    background-color: #0f766e;
+    color: #fff;
     font-weight: 700;
     cursor: pointer;
 }

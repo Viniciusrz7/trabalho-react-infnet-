@@ -16,7 +16,7 @@ export const ThemeContextInstance = createContext<ThemeContextProps>(null as any
 
 const lightTheme = createTheme({
     palette: {
-        primary: { main: "#f9CA24" }
+        primary: { main: "#0f766e" }
     },
     typography: { fontFamily: '"Poppins", sans-serif' }
 })
@@ -24,7 +24,7 @@ const lightTheme = createTheme({
 const darkTheme = createTheme({
     palette: {
         mode: "dark",
-        primary: { main: "#f9CA24" }
+        primary: { main: "#2dd4bf" }
     },
     typography: { fontFamily: '"Poppins", sans-serif' }
 })
