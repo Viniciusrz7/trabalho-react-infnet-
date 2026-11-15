@@ -6,6 +6,12 @@
     gap: 16px;
 }
 
+.home-climas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 .home-filtro {
     display: flex;
     flex-wrap: wrap;

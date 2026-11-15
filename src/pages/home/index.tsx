@@ -61,7 +61,10 @@ export default function Home() {
                         <h2>Olá, {usuario.nome}</h2>
                         <h3>Email: {usuario.email}</h3>
                     </div>
-                    <Clima />
+                    <div className="home-climas">
+                        <Clima local="Local da Infnet" cidade="Rio de Janeiro" />
+                        <Clima local="Onde o aluno Vinicius mora" cidade="Juiz de Fora" />
+                    </div>
                 </div>
 
                 <div className="home-filtro">
