@@ -71,7 +71,7 @@ export default function Home() {
                         <option value="">Todos os cursos</option>
                         {cursos.map((curso) => <option key={curso.id} value={curso.nome}>{curso.nome}</option>)}
                     </select>
-                    <Botao texto="Limpar" variant="outlined" color="inherit" onClick={reset} />
+                    <Botao texto="Limpar" estilo="secundario" onClick={reset} />
                 </div>
 
                 <div className="home-content-list">
@@ -87,7 +87,7 @@ export default function Home() {
                                 celulas: [aluno.nome, aluno.email, aluno.telefone, aluno.curso, `${aluno.cidade}/${aluno.uf}`,
                                 <div className="home-acoes">
                                     {presencas.find((item) => item.id === aluno.id) ? (
-                                        <BotaoAcao titulo="Remover presença" color="success" onClick={() => dispatch(removePresenca(aluno.id))}><FiUserCheck /></BotaoAcao>
+                                        <BotaoAcao titulo="Remover presença" estilo="sucesso" onClick={() => dispatch(removePresenca(aluno.id))}><FiUserCheck /></BotaoAcao>
                                     ) : (
                                         <BotaoAcao titulo="Marcar presença" onClick={() => dispatch(addPresenca({ id: aluno.id, nome: aluno.nome, curso: aluno.curso }))}><FiUserPlus /></BotaoAcao>
                                     )}

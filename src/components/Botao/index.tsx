@@ -5,13 +5,12 @@ interface BotaoProps {
     texto: string
     onClick?: () => void
     type?: "button" | "submit"
-    color?: "primary" | "error" | "inherit"
-    variant?: "contained" | "outlined" | "text"
+    estilo?: "perigo" | "secundario"
     disabled?: boolean
 }
 
-export default function Botao({ texto, onClick, type, color, variant, disabled }: BotaoProps) {
+export default function Botao({ texto, onClick, type, estilo, disabled }: BotaoProps) {
     return (
-        <Button className="botao" type={type} color={color} variant={variant ? variant : "contained"} disabled={disabled} onClick={onClick}>{texto}</Button>
+        <Button className={estilo ? `botao botao-${estilo}` : "botao"} type={type} variant={estilo === "secundario" ? "outlined" : "contained"} disabled={disabled} onClick={onClick}>{texto}</Button>
     )
 }

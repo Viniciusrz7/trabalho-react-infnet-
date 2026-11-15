@@ -23,11 +23,11 @@ export default function Presencas() {
                         linhas={items.map((item) => ({
                             id: item.id,
                             celulas: [item.nome, item.curso,
-                            <BotaoAcao titulo="Remover presença" color="error" onClick={() => dispatch(removePresenca(item.id))}><FiUserX /></BotaoAcao>]
+                            <BotaoAcao titulo="Remover presença" estilo="perigo" onClick={() => dispatch(removePresenca(item.id))}><FiUserX /></BotaoAcao>]
                         }))}
                     />
                     <p className='presencas-total'>{items.length} presença(s) registrada(s)</p>
-                    <Botao texto="Limpar lista" variant="outlined" color="error" onClick={() => dispatch(clearPresencas())} />
+                    <Botao texto="Limpar lista" estilo="perigo" onClick={() => dispatch(clearPresencas())} />
                 </>
             )}
         </div>

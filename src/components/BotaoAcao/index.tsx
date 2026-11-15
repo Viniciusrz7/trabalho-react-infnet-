@@ -6,13 +6,13 @@ interface BotaoAcaoProps {
     titulo: string
     onClick: () => void
     children: React.ReactNode
-    color?: "default" | "primary" | "error" | "success"
+    estilo?: "perigo" | "sucesso"
 }
 
-export default function BotaoAcao({ titulo, onClick, children, color }: BotaoAcaoProps) {
+export default function BotaoAcao({ titulo, onClick, children, estilo }: BotaoAcaoProps) {
     return (
         <Tooltip title={titulo}>
-            <IconButton className="botao-acao" aria-label={titulo} color={color} onClick={onClick}>
+            <IconButton className={estilo ? `botao-acao botao-acao-${estilo}` : "botao-acao"} aria-label={titulo} onClick={onClick}>
                 {children}
             </IconButton>
         </Tooltip>

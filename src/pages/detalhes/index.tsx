@@ -52,7 +52,7 @@ export default function Detalhes() {
                 {query.data && (
                     <div className="detalhes-acoes">
                         <BotaoAcao titulo="Editar aluno" onClick={() => navigate(`/aluno/${id}/editar`)}><FiEdit /></BotaoAcao>
-                        <BotaoAcao titulo="Excluir aluno" color="error" onClick={openModal}><FiTrash /></BotaoAcao>
+                        <BotaoAcao titulo="Excluir aluno" estilo="perigo" onClick={openModal}><FiTrash /></BotaoAcao>
                     </div>
                 )}
                 <h1 className="detalhes-titulo">Detalhes do aluno {params.id}</h1>
@@ -70,14 +70,14 @@ export default function Detalhes() {
                     </div>
                 )}
                 <div className="detalhes-voltar">
-                    <Botao texto="Voltar" variant="outlined" color="inherit" onClick={() => navigate("/home")} />
+                    <Botao texto="Voltar" estilo="secundario" onClick={() => navigate("/home")} />
                 </div>
             </div>
             <Modal closeModal={closeModal} modalIsOpen={modalIsOpen}>
                 <h3 className="modal-titulo">{`Tem certeza que deseja excluir o aluno ${query.data?.nome}?`}</h3>
                 <div className="modal-botoes">
-                    {deleteMutation.isPending ? (<p>Apagando...</p>) : (<Botao texto="Sim" color="error" onClick={() => { deleteMutation.mutate(id) }} />)}
-                    <Botao texto="Não" variant="outlined" color="inherit" onClick={closeModal} />
+                    {deleteMutation.isPending ? (<p>Apagando...</p>) : (<Botao texto="Sim" estilo="perigo" onClick={() => { deleteMutation.mutate(id) }} />)}
+                    <Botao texto="Não" estilo="secundario" onClick={closeModal} />
                 </div>
             </Modal>
         </Container>

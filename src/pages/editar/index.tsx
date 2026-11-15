@@ -52,7 +52,7 @@ export default function Editar() {
                     <AlunoForm aluno={query.data} cursos={cursos} isPending={mutate.isPending} saveAluno={saveAluno} />
                 )}
                 <div className="editar-voltar">
-                    <Botao texto="Cancelar" variant="outlined" color="inherit" onClick={() => navigate(-1)} />
+                    <Botao texto="Cancelar" estilo="secundario" onClick={() => navigate(-1)} />
                 </div>
             </div>
         </Container>

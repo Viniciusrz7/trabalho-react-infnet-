@@ -2,3 +2,11 @@ button.botao-acao {
     padding: 5px;
     font-size: 1.125rem;
 }
+
+button.botao-acao-perigo {
+    color: #e53935;
+}
+
+button.botao-acao-sucesso {
+    color: #43a047;
+}
