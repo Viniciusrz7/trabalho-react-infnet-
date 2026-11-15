@@ -1,7 +1,6 @@
 import { alunos } from "../data/index.js"
 import type { Aluno, DadosAluno } from "../utils/types.js"
 
-// o próximo id continua do maior id que veio do JSON e nunca é reaproveitado
 let proximoId = alunos.reduce((maior, aluno) => Math.max(maior, aluno.id), 0) + 1
 
 export function listar(): Aluno[] {
