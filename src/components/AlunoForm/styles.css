@@ -1,0 +1,19 @@
+.aluno-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 480px;
+    max-width: 100%;
+    padding-top: 8px;
+}
+
+.aluno-form-linha {
+    display: flex;
+    gap: 12px;
+}
+
+@media (max-width: 520px) {
+    .aluno-form-linha {
+        flex-direction: column;
+    }
+}

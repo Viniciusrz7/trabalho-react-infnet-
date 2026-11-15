@@ -1,4 +1,5 @@
 import ExternalModal from "react-modal"
+import "./styles.css"
 import { useContext } from "react"
 import { ThemeContextInstance } from "../../contexts/themeContextInstance"
 

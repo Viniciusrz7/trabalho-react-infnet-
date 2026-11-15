@@ -12,17 +12,17 @@ export default function App() {
   return (
 
     <ThemeContext>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/home" element={<Home />} />
-          </Route>
-        </Routes>
-        <ToastContainer position="top-right" autoClose={3000} />
-      </BrowserRouter>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/home" element={<Home />} />
+            </Route>
+          </Routes>
+          <ToastContainer position="top-right" autoClose={3000} />
+        </BrowserRouter>
+      </QueryClientProvider>
     </ThemeContext>
   )
 }

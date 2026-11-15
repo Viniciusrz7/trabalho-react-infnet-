@@ -1,21 +1,43 @@
 import Container from "../../templates/container"
 import "./styles.css"
 import { useQuery } from "@tanstack/react-query"
-import { getAlunos } from "../../service/alunos"
+import { getAlunos, postAluno } from "../../service/alunos"
 import { useAuth } from "../../hooks/useAuth"
 import { useFormulario } from "../../hooks/useFormulario"
 import { useCursos } from "../../hooks/useCursos"
+import { useState } from "react"
 import Tabela from "../../components/Tabela"
 import Botao from "../../components/Botao"
+import Modal from "../../components/Modal"
+import AlunoForm from "../../components/AlunoForm"
+import type { FormAluno } from "../../components/AlunoForm"
 import CircularProgress from "@mui/material/CircularProgress"
 import Alert from "@mui/material/Alert"
+import { useMutation } from "@tanstack/react-query"
+import { toastError, toastSuccess } from "../../utils/toast"
+import { getMensagemErro } from "../../utils/erros"
 
 export default function Home() {
     const { usuario } = useAuth();
     const { values, handleChange, reset } = useFormulario({ busca: "", curso: "" })
     const { cursos } = useCursos()
+    const [isVisibleModalForm, setIsVisibleModalForm] = useState(false)
 
     const query = useQuery({ queryKey: ['alunos'], queryFn: getAlunos, staleTime: 1000 * 60 * 5, retry: false, refetchOnMount: 'always' })
+
+    const mutate = useMutation({
+        mutationFn: postAluno, onSuccess: () => {
+            toastSuccess("Aluno cadastrado com sucesso")
+            setIsVisibleModalForm(false)
+            query.refetch()
+        }, onError: (error) => {
+            toastError(getMensagemErro(error))
+        }
+    })
+
+    function saveAluno(values: FormAluno) {
+        mutate.mutate(values)
+    }
 
     const alunosFiltrados = query.data?.alunos.filter((aluno) => {
         const nomeConfere = aluno.nome.toLowerCase().includes(values.busca.toLowerCase())
@@ -59,6 +81,11 @@ export default function Home() {
                     )}
                 </div>
                 <p className="home-total">{`${alunosFiltrados.length} aluno(s) na lista`}</p>
+                <button onClick={() => setIsVisibleModalForm(true)} className="home-botao-novo" title="Cadastrar aluno">+</button>
+                <Modal closeModal={() => setIsVisibleModalForm(false)} modalIsOpen={isVisibleModalForm}>
+                    <h3 className="modal-titulo">Novo aluno</h3>
+                    <AlunoForm cursos={cursos} isPending={mutate.isPending} saveAluno={saveAluno} />
+                </Modal>
             </Container>
         </div>
     )
