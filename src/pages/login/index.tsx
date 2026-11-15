@@ -2,6 +2,7 @@ import './styles.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import { useMutation } from "@tanstack/react-query"
 import {useAuth} from "../../hooks/useAuth";
 import { useFormulario } from "../../hooks/useFormulario";
 
@@ -14,34 +15,32 @@ export default function Login() {
 
     const { values, handleChange } = useFormulario({ email: '', password: '' });
     const [erro, setErro] = useState('');
-    const [carregando, setCarregando] = useState(false);
     const navigate = useNavigate();
 
     const {setAuthData} = useAuth()
 
     async function authLogin() {
-        setCarregando(true)
 
-        try {
-            const response = await axios.post<ResponseAuth>('http://localhost:3001/auth/login', { email: values.email, password: values.password }, {
-                validateStatus: function (status) {
-                    return status < 500
-                }
-            })
-
-            if (response.status !== 200) {
-                setErro('Usuário ou senha incorretos')
-                return;
+        const response = await axios.post<ResponseAuth>('http://localhost:3001/auth/login', { email: values.email, password: values.password }, {
+            validateStatus: function (status) {
+                return status < 500
             }
+        })
 
-            setAuthData(response.data)
-            navigate("/home")
-        } catch {
-            setErro('Não foi possível conectar ao servidor')
-        } finally {
-            setCarregando(false)
+        if (response.status !== 200) {
+            setErro('Usuário ou senha incorretos')
+            return;
         }
+
+        setAuthData(response.data)
+        navigate("/home")
     }
+
+    const mutate = useMutation({
+        mutationFn: authLogin, onError: () => {
+            setErro('Não foi possível conectar ao servidor')
+        }
+    })
 
     function onSubmit() {
         if (values.email === '' || values.password === '') {
@@ -50,7 +49,7 @@ export default function Login() {
         }
         else {
             setErro('')
-            authLogin();
+            mutate.mutate();
         }
     }
 
@@ -67,7 +66,7 @@ export default function Login() {
 
                 {erro && <span className="login-erro">{erro}</span>}
 
-                <button type="button" disabled={carregando} onClick={onSubmit}>{carregando ? 'Entrando...' : 'Entrar'}</button>
+                <button type="button" disabled={mutate.isPending} onClick={onSubmit}>{mutate.isPending ? 'Entrando...' : 'Entrar'}</button>
             </form>
         </div>
     )
