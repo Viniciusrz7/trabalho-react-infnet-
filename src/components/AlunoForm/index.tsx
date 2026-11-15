@@ -1,11 +1,12 @@
 import "./styles.css"
 import { useEffect } from "react"
-import { useForm, useWatch } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import TextField from "@mui/material/TextField"
 import Botao from "../Botao"
 import { getEndereco } from "../../service/viacep"
+import type { EnderecoResponse } from "../../service/viacep"
 import type { CursoResponse } from "../../pages/home/types"
 
 const schemaValidation = yup.object({
@@ -41,8 +42,7 @@ interface AlunoFormProps {
 
 export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: AlunoFormProps) {
 
-    const { register, handleSubmit, setValue, setError, clearErrors, control, formState: { errors } } = useForm({ resolver: yupResolver(schemaValidation), defaultValues: aluno })
-    const cep = useWatch({ control, name: "cep" })
+    const { register, handleSubmit, setValue, setError, clearErrors, formState: { errors } } = useForm({ resolver: yupResolver(schemaValidation), defaultValues: aluno })
 
     useEffect(() => {
         if (aluno && cursos.length) {
@@ -50,31 +50,29 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
         }
     }, [aluno, cursos, setValue])
 
-    useEffect(() => {
-        const cepLimpo = cep ? cep.replace(/\D/g, "") : ""
+    function preencherEndereco(endereco: EnderecoResponse) {
+        clearErrors("cep")
+        setValue("logradouro", endereco.logradouro, { shouldValidate: true })
+        setValue("bairro", endereco.bairro, { shouldValidate: true })
+        setValue("cidade", endereco.localidade, { shouldValidate: true })
+        setValue("uf", endereco.uf, { shouldValidate: true })
+    }
 
-        if (cepLimpo.length !== 8 || cep === aluno?.cep) {
+    async function buscarEndereco(cep: string) {
+        const cepLimpo = cep.replace(/\D/g, "")
+        if (cepLimpo.length !== 8) {
             return
         }
 
-        async function buscarEndereco() {
-            try {
-                const endereco = await getEndereco(cepLimpo)
-
-                clearErrors("cep")
-                setValue("logradouro", endereco.logradouro, { shouldValidate: true })
-                setValue("bairro", endereco.bairro, { shouldValidate: true })
-                setValue("cidade", endereco.localidade, { shouldValidate: true })
-                setValue("uf", endereco.uf, { shouldValidate: true })
-            } catch (error) {
-                if (error instanceof Error && error.name !== "AbortError") {
-                    setError("cep", { message: error.message })
-                }
+        try {
+            const endereco = await getEndereco(cepLimpo)
+            preencherEndereco(endereco)
+        } catch (error) {
+            if (error instanceof Error && error.name !== "AbortError") {
+                setError("cep", { message: error.message })
             }
         }
-
-        buscarEndereco()
-    }, [cep, aluno, setValue, setError, clearErrors])
+    }
 
     return (
         <form className="aluno-form" onSubmit={handleSubmit(saveAluno)}>
@@ -93,7 +91,7 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
             </div>
             <TextField label="CEP" size="small" error={Boolean(errors.cep)}
                 helperText={errors.cep ? errors.cep.message : "Digite o CEP para preencher o endereço"}
-                slotProps={{ inputLabel: { shrink: true } }} {...register("cep")} />
+                slotProps={{ inputLabel: { shrink: true } }} {...register("cep", { onChange: (evento) => buscarEndereco(evento.target.value) })} />
             <TextField label="Logradouro" size="small" error={Boolean(errors.logradouro)} helperText={errors.logradouro?.message}
                 slotProps={{ inputLabel: { shrink: true } }} {...register("logradouro")} />
             <div className="aluno-form-linha">
