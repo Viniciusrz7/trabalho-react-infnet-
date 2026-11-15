@@ -1,6 +1,5 @@
 import { createContext } from "react";
 import { useState } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { THEME_KEY } from "../utils/storageKeys";
 
 interface ThemeContextProps {
@@ -13,21 +12,6 @@ interface ProviderProps {
 }
 
 export const ThemeContextInstance = createContext<ThemeContextProps>(null as any);
-
-const lightTheme = createTheme({
-    palette: {
-        primary: { main: "#0f766e" }
-    },
-    typography: { fontFamily: '"Poppins", sans-serif' }
-})
-
-const darkTheme = createTheme({
-    palette: {
-        mode: "dark",
-        primary: { main: "#2dd4bf" }
-    },
-    typography: { fontFamily: '"Poppins", sans-serif' }
-})
 
 function loadTheme(): string {
     const dataStorageString = localStorage.getItem(THEME_KEY)
@@ -46,9 +30,7 @@ export default function ThemeContext({ children }: ProviderProps) {
 
     return (
         <ThemeContextInstance.Provider value={{ theme: theme, toggleTheme: toggleTheme }}>
-            <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
-                {children}
-            </ThemeProvider>
+            {children}
         </ThemeContextInstance.Provider>
     )
 }
