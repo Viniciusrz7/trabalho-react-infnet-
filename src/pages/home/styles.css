@@ -28,6 +28,11 @@
     min-width: 200px;
 }
 
+.home-filtro select {
+    width: 300px;
+    padding: 0 7px;
+}
+
 .home-carregando {
     display: flex;
     justify-content: center;
