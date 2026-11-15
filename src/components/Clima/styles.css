@@ -1,0 +1,29 @@
+.clima {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--cor-card);
+    border: 2px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 10px 16px;
+    min-width: 240px;
+}
+
+.clima-icone {
+    font-size: 2rem;
+    color: #f9CA24;
+}
+
+.clima-titulo {
+    font-size: 0.85rem;
+}
+
+.clima-temperatura {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.clima-detalhe {
+    font-size: 0.75rem;
+    color: var(--cor-suave);
+}

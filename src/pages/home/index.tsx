@@ -15,6 +15,7 @@ import Tabela from "../../components/Tabela"
 import Botao from "../../components/Botao"
 import BotaoAcao from "../../components/BotaoAcao"
 import Modal from "../../components/Modal"
+import Clima from "../../components/Clima"
 import AlunoForm from "../../components/AlunoForm"
 import type { FormAluno } from "../../components/AlunoForm"
 import CircularProgress from "@mui/material/CircularProgress"
@@ -58,9 +59,14 @@ export default function Home() {
     return (
         <div>
             <Container>
-                <h1>Alunos</h1>
-                <h2>Olá, {usuario.nome}</h2>
-                <h3>Email: {usuario.email}</h3>
+                <div className="home-topo">
+                    <div>
+                        <h1>Alunos</h1>
+                        <h2>Olá, {usuario.nome}</h2>
+                        <h3>Email: {usuario.email}</h3>
+                    </div>
+                    <Clima />
+                </div>
 
                 <form className="home-filtro" onSubmit={(evento) => evento.preventDefault()}>
                     <input type="text" name="busca" placeholder="Buscar aluno pelo nome" value={values.busca}
