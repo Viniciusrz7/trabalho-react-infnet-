@@ -1,7 +1,7 @@
 import ExternalModal from "react-modal"
 import "./styles.css"
 import { useContext } from "react"
-import { ThemeContextInstance } from "../../contexts/themeContextInstance"
+import { ThemeContextInstance } from "../../contexts/themeContext"
 
 const customStyles = {
     overlay: {

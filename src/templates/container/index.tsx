@@ -3,10 +3,10 @@ import Modal from '../../components/Modal';
 import Footer from '../../components/Footer';
 import {useNavigate} from "react-router"
 import './styles.css'
-import { useContext, useState } from 'react';
+import { useState, useContext } from 'react';
 import { useSelector } from "react-redux";
 import { useAuth } from "../../hooks/useAuth";
-import { ThemeContextInstance } from '../../contexts/themeContextInstance';
+import { ThemeContextInstance } from '../../contexts/themeContext';
 import type { RootState } from "../../store";
 import { FiMoon, FiSun } from "react-icons/fi";
 interface ContainerProps {
