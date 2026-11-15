@@ -2,7 +2,7 @@
 
 Sistema de gestão escolar com CRUD completo de alunos, feito em **React + TypeScript** (Vite) e com uma API em **Express**. É o Projeto de Disciplina de React da pós-graduação do Instituto Infnet.
 
-Quem usa é a secretaria da escola: faz login, vê a lista de alunos, cadastra, consulta os detalhes, edita, exclui e marca a presença do dia. O endereço do aluno é preenchido sozinho a partir do CEP e a página inicial mostra o clima do momento.
+Quem usa é a secretaria da escola: faz login, vê a lista de alunos, cadastra, consulta os detalhes, edita, exclui e marca a presença do dia. O endereço do aluno é preenchido sozinho a partir do CEP e a página inicial mostra o clima do momento em duas cidades: o Rio de Janeiro, onde fica a Infnet, e Juiz de Fora, onde eu moro.
 
 ![Página de alunos](./screenshots/home.png)
 
@@ -30,7 +30,7 @@ Quem usa é a secretaria da escola: faz login, vê a lista de alunos, cadastra, 
 - **Busca de CEP**: ao digitar o CEP, logradouro, bairro, cidade e UF são preenchidos pelo ViaCEP.
 - **Detalhes, edição e exclusão** em páginas próprias. A exclusão pede confirmação mostrando o nome do aluno.
 - **Lista de presença**: marca e desmarca direto na tabela, com contador no cabeçalho.
-- **Clima do dia** na página inicial, atualizado sozinho a cada 5 minutos.
+- **Clima do dia** na página inicial, em dois cartões lado a lado (Rio de Janeiro e Juiz de Fora), atualizados sozinhos a cada 5 minutos.
 - **Tema claro e escuro**, que continua salvo depois de fechar o navegador.
 - **Avisos** de sucesso e de erro em todas as ações.
 
