@@ -132,7 +132,8 @@ trabalho-react-infnet-/
     ├── hooks/               useAuth, useFormulario e useCursos
     ├── contexts/            tema claro e escuro (Context API)
     ├── store/               lista de presença (Redux)
-    ├── service/             chamadas de API (alunos, ViaCEP e clima)
+    ├── service/             chamadas de API (alunos, cursos, ViaCEP e clima)
+    ├── schemas/             validação do formulário de aluno (Yup)
     └── utils/               avisos, mensagens de erro e chaves do localStorage
 ```
 
@@ -202,16 +203,16 @@ Os erros sempre vêm no formato `{ "erro": "mensagem" }`:
 | Componente de classe | `src/components/Footer/index.tsx` |
 | `useState` e `useEffect` | `src/hooks/useCursos.ts`, `src/components/AlunoForm/index.tsx` |
 | Hook personalizado | `src/hooks/useFormulario.ts`, `src/hooks/useCursos.ts` |
-| Context API | `src/contexts/` (tema claro e escuro) |
+| Context API | `src/contexts/themeContext.tsx` (tema claro e escuro) |
 | Redux, `useSelector` e `useDispatch` | `src/store/`, `src/components/Presencas`, `src/pages/home`, `src/templates/container` |
 | Formulário controlado | Login e filtro da lista |
-| Formulário não controlado com validação | `src/components/AlunoForm` (React Hook Form + Yup) |
-| Axios com GET, POST, PUT e DELETE | `src/service/alunos.ts` |
-| React Query (cache e atualização automática) | `src/pages/home`, `src/pages/detalhes`, `src/pages/editar`, `src/components/Clima` |
+| Formulário não controlado com validação | `src/components/AlunoForm` (React Hook Form) e `src/schemas/alunos.schema.ts` (Yup) |
+| Axios com GET, POST, PUT e DELETE | `src/service/alunos.ts` e `src/service/cursos.ts` |
+| React Query (cache e atualização automática) | `src/pages/home`, `src/pages/detalhes`, `src/pages/editar`, `src/components/Clima`, consulta do CEP em `src/components/AlunoForm` |
 | API real | ViaCEP em `src/service/viacep.ts` e Open-Meteo em `src/service/clima.ts` |
 | `Promise.race` e `AbortController` | `src/service/viacep.ts` |
 | React Router e rota privada | `src/App.tsx` e `src/components/PrivateRoute` |
-| Componentes de terceiros | Material UI na tabela, nos campos, nos botões e nos alertas |
+| Componentes de terceiros | Material UI na tabela, nos campos, nos botões e nos alertas, com as cores dos botões nos `styles.css` |
 | Tratamento de erros com alertas | `src/utils/erros.ts`, `src/utils/toast.ts` e os `onError` das páginas |
 
 ## Testes em navegadores
