@@ -51,7 +51,7 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
     }, [aluno, cursos, setValue])
 
     useEffect(() => {
-        const cepLimpo = (cep ?? "").replace(/\D/g, "")
+        const cepLimpo = cep ? cep.replace(/\D/g, "") : ""
 
         if (cepLimpo.length !== 8 || cep === aluno?.cep) {
             return
@@ -59,19 +59,23 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
 
         const controller = new AbortController()
 
-        getEndereco(cepLimpo, controller)
-            .then((endereco) => {
+        async function buscarEndereco() {
+            try {
+                const endereco = await getEndereco(cepLimpo, controller.signal)
+
                 clearErrors("cep")
                 setValue("logradouro", endereco.logradouro, { shouldValidate: true })
                 setValue("bairro", endereco.bairro, { shouldValidate: true })
                 setValue("cidade", endereco.localidade, { shouldValidate: true })
                 setValue("uf", endereco.uf, { shouldValidate: true })
-            })
-            .catch((error) => {
-                if (error.name !== "AbortError") {
+            } catch (error) {
+                if (error instanceof Error && error.name !== "AbortError") {
                     setError("cep", { message: error.message })
                 }
-            })
+            }
+        }
+
+        buscarEndereco()
 
         return () => {
             controller.abort()
@@ -94,7 +98,7 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
                 </TextField>
             </div>
             <TextField label="CEP" size="small" error={!!errors.cep}
-                helperText={errors.cep?.message ?? "Digite o CEP para preencher o endereço"}
+                helperText={errors.cep ? errors.cep.message : "Digite o CEP para preencher o endereço"}
                 slotProps={{ inputLabel: { shrink: true } }} {...register("cep")} />
             <TextField label="Logradouro" size="small" error={!!errors.logradouro} helperText={errors.logradouro?.message}
                 slotProps={{ inputLabel: { shrink: true } }} {...register("logradouro")} />
