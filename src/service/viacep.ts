@@ -18,7 +18,9 @@ export async function getEndereco(cep: string) {
     const signal = controller.signal
 
     const response = await Promise.race([
-        fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal }),
+        fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal }).catch(() => {
+            throw new Error("Não foi possível consultar o CEP, tente novamente")
+        }),
         new Promise<Response>((_, reject) => {
             setTimeout(() => reject(new Error("A consulta do CEP demorou demais, tente novamente")), 8000)
         }),

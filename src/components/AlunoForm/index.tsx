@@ -2,6 +2,7 @@ import "./styles.css"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useMutation } from "@tanstack/react-query"
 import { schemaValidation } from "../../schemas/alunos.schema"
 import TextField from "@mui/material/TextField"
 import Botao from "../Botao"
@@ -31,6 +32,7 @@ interface AlunoFormProps {
 export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: AlunoFormProps) {
 
     const { register, handleSubmit, setValue, setError, clearErrors, formState: { errors } } = useForm({ resolver: yupResolver(schemaValidation), defaultValues: aluno })
+    const cepMutation = useMutation({ mutationFn: getEndereco })
 
     useEffect(() => {
         if (aluno && cursos.length) {
@@ -46,20 +48,18 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
         setValue("uf", endereco.uf, { shouldValidate: true })
     }
 
-    async function buscarEndereco(cep: string) {
+    function buscarEndereco(cep: string) {
         const cepLimpo = cep.replace(/\D/g, "")
         if (cepLimpo.length !== 8) {
             return
         }
 
-        try {
-            const endereco = await getEndereco(cepLimpo)
-            preencherEndereco(endereco)
-        } catch (error) {
-            if (error instanceof Error && error.name !== "AbortError") {
+        cepMutation.mutate(cepLimpo, {
+            onSuccess: preencherEndereco,
+            onError: (error) => {
                 setError("cep", { message: error.message })
             }
-        }
+        })
     }
 
     return (
