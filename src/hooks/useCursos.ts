@@ -1,38 +1,22 @@
 import { useEffect, useState } from "react"
-import { api } from "../service/api"
+import { getCursos } from "../service/cursos"
 import type { CursoResponse } from "../pages/home/types"
 import { toastError } from "../utils/toast"
-
-interface ListaCursosResponse {
-    cursos: Array<CursoResponse>
-}
 
 export function useCursos() {
 
     const [cursos, setCursos] = useState<CursoResponse[]>([])
 
     useEffect(() => {
-        async function getCursos() {
+        async function loadCursos() {
             try {
-                const response = await api.get<ListaCursosResponse>('/cursos')
-
-                if (!ignore) {
-                    setCursos(response.data.cursos)
-                }
+                const data = await getCursos()
+                setCursos(data.cursos)
             } catch {
-                if (!ignore) {
-                    toastError("Erro ao carregar os cursos")
-                }
+                toastError("Erro ao carregar os cursos")
             }
         }
-
-        let ignore = false
-        getCursos()
-
-        return () => {
-            ignore = true
-        }
+        loadCursos()
     }, [])
-
     return { cursos }
 }
