@@ -58,14 +58,11 @@ export default function Login() {
             <form className="container-form-login">
                 <h1>Login</h1>
                 <p>Informe seus dados corretamente</p>
-
                 <input type="text" placeholder="Email" value={values.email}
                     onChange={(evento) => handleChange("email", evento.target.value)} />
                 <input type="password" placeholder="Senha" value={values.password}
                     onChange={(evento) => handleChange("password", evento.target.value)} />
-
                 {erro && <span className="login-erro">{erro}</span>}
-
                 <button type="button" disabled={mutate.isPending} onClick={onSubmit}>{mutate.isPending ? 'Entrando...' : 'Entrar'}</button>
             </form>
         </div>
