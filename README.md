@@ -241,7 +241,7 @@ O fluxo completo (login, rota privada, listagem e filtros, cadastro com CEP, det
 - A estrutura do projeto segue o que foi feito nas aulas de React do Instituto Infnet.
 - Documentações oficiais consultadas: [React](https://react.dev/), [Vite](https://vite.dev/), [React Router](https://reactrouter.com/), [TanStack Query](https://tanstack.com/query/latest), [Redux Toolkit](https://redux-toolkit.js.org/), [Material UI](https://mui.com/material-ui/), [React Hook Form](https://react-hook-form.com/), [Axios](https://axios-http.com/) e [MDN](https://developer.mozilla.org/).
 - Dados de endereço: [ViaCEP](https://viacep.com.br/). Dados de clima: [Open-Meteo](https://open-meteo.com/).
-- Ferramenta de IA: o [Claude](https://claude.com/product/claude-code) (Anthropic) foi usado como apoio no desenvolvimento, na geração e revisão de trechos de código, nos estilos, nos dados de teste e nos testes em navegadores, conforme a política de uso de IA da disciplina. Os commits feitos com esse apoio estão marcados com `Co-Authored-By`.
+- Ferramenta de IA: o [Claude](https://claude.com/product/claude-code) (Anthropic) foi usado como apoio no desenvolvimento, na geração e revisão de trechos de código, nos estilos, nos dados de teste e nos testes em navegadores, conforme a política de uso de IA da disciplina.
 
 ## Autor
 
