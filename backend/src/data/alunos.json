@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "nome": "Ana Clara Souza",
+    "email": "ana.souza@teste.com",
+    "telefone": "(11) 98765-4321",
+    "curso": "Engenharia de Software",
+    "cep": "01001-000",
+    "logradouro": "Praça da Sé",
+    "bairro": "Sé",
+    "cidade": "São Paulo",
+    "uf": "SP"
+  },
+  {
+    "id": 2,
+    "nome": "Bruno Henrique Lima",
+    "email": "bruno.lima@teste.com",
+    "telefone": "(11) 97654-3210",
+    "curso": "Ciência de Dados",
+    "cep": "01310-100",
+    "logradouro": "Avenida Paulista",
+    "bairro": "Bela Vista",
+    "cidade": "São Paulo",
+    "uf": "SP"
+  },
+  {
+    "id": 3,
+    "nome": "Carla Mendes Oliveira",
+    "email": "carla.oliveira@teste.com",
+    "telefone": "(21) 99876-5432",
+    "curso": "Análise e Desenvolvimento de Sistemas",
+    "cep": "20040-020",
+    "logradouro": "Praça Pio X",
+    "bairro": "Centro",
+    "cidade": "Rio de Janeiro",
+    "uf": "RJ"
+  },
+  {
+    "id": 4,
+    "nome": "Diego Ferreira Santos",
+    "email": "diego.santos@teste.com",
+    "telefone": "(21) 98888-1212",
+    "curso": "Engenharia de Software",
+    "cep": "22041-001",
+    "logradouro": "Avenida Atlântica",
+    "bairro": "Copacabana",
+    "cidade": "Rio de Janeiro",
+    "uf": "RJ"
+  },
+  {
+    "id": 5,
+    "nome": "Eduarda Martins Rocha",
+    "email": "eduarda.rocha@teste.com",
+    "telefone": "(31) 97777-3434",
+    "curso": "Redes de Computadores",
+    "cep": "30130-010",
+    "logradouro": "Praça Sete de Setembro",
+    "bairro": "Centro",
+    "cidade": "Belo Horizonte",
+    "uf": "MG"
+  },
+  {
+    "id": 6,
+    "nome": "Felipe Augusto Pereira",
+    "email": "felipe.pereira@teste.com",
+    "telefone": "(41) 96666-5656",
+    "curso": "Segurança da Informação",
+    "cep": "80010-000",
+    "logradouro": "Rua José Loureiro",
+    "bairro": "Centro",
+    "cidade": "Curitiba",
+    "uf": "PR"
+  },
+  {
+    "id": 7,
+    "nome": "Gabriela Nunes Costa",
+    "email": "gabriela.costa@teste.com",
+    "telefone": "(51) 95555-7878",
+    "curso": "Ciência de Dados",
+    "cep": "90010-150",
+    "logradouro": "Praça da Alfândega",
+    "bairro": "Centro Histórico",
+    "cidade": "Porto Alegre",
+    "uf": "RS"
+  },
+  {
+    "id": 8,
+    "nome": "Henrique Barbosa Alves",
+    "email": "henrique.alves@teste.com",
+    "telefone": "(61) 94444-9090",
+    "curso": "Análise e Desenvolvimento de Sistemas",
+    "cep": "70040-010",
+    "logradouro": "SBN Quadra 1",
+    "bairro": "Asa Norte",
+    "cidade": "Brasília",
+    "uf": "DF"
+  },
+  {
+    "id": 9,
+    "nome": "Isabela Ribeiro Gomes",
+    "email": "isabela.gomes@teste.com",
+    "telefone": "(81) 93333-2323",
+    "curso": "Engenharia de Software",
+    "cep": "50030-230",
+    "logradouro": "Cais do Apolo",
+    "bairro": "Recife",
+    "cidade": "Recife",
+    "uf": "PE"
+  },
+  {
+    "id": 10,
+    "nome": "João Pedro Carvalho",
+    "email": "joao.carvalho@teste.com",
+    "telefone": "(48) 92222-4545",
+    "curso": "Redes de Computadores",
+    "cep": "88010-400",
+    "logradouro": "Praça Quinze de Novembro",
+    "bairro": "Centro",
+    "cidade": "Florianópolis",
+    "uf": "SC"
+  }
+]
