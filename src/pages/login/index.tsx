@@ -23,7 +23,7 @@ export default function Login() {
         setCarregando(true)
 
         try {
-            const response = await axios.post<ResponseAuth>('http://localhost:3001/auth/login', values, {
+            const response = await axios.post<ResponseAuth>('http://localhost:3001/auth/login', { email: values.email, password: values.password }, {
                 validateStatus: function (status) {
                     return status < 500
                 }
@@ -43,9 +43,7 @@ export default function Login() {
         }
     }
 
-    function onSubmit(evento: React.SubmitEvent<HTMLFormElement>) {
-        evento.preventDefault()
-
+    function onSubmit() {
         if (values.email === '' || values.password === '') {
             setErro('Preencha todos os campos');
             return;
@@ -58,18 +56,18 @@ export default function Login() {
 
     return (
         <div className="container-login">
-            <form className="container-form-login" onSubmit={onSubmit}>
+            <form className="container-form-login">
                 <h1>Login</h1>
                 <p>Informe seus dados corretamente</p>
 
-                <input type="text" name="email" placeholder="Email" value={values.email}
-                    onChange={handleChange} />
-                <input type="password" name="password" placeholder="Senha" value={values.password}
-                    onChange={handleChange} />
+                <input type="text" placeholder="Email" value={values.email}
+                    onChange={(evento) => handleChange("email", evento.target.value)} />
+                <input type="password" placeholder="Senha" value={values.password}
+                    onChange={(evento) => handleChange("password", evento.target.value)} />
 
                 {erro && <span className="login-erro">{erro}</span>}
 
-                <button type="submit" disabled={carregando}>{carregando ? 'Entrando...' : 'Entrar'}</button>
+                <button type="button" disabled={carregando} onClick={onSubmit}>{carregando ? 'Entrando...' : 'Entrar'}</button>
             </form>
         </div>
     )

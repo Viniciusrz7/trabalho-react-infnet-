@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import axios from "axios"
 import { api } from "../service/api"
 import type { CursoResponse } from "../pages/home/types"
+import { toastError } from "../utils/toast"
 
 interface ListaCursosResponse {
     cursos: Array<CursoResponse>
@@ -10,25 +10,29 @@ interface ListaCursosResponse {
 export function useCursos() {
 
     const [cursos, setCursos] = useState<CursoResponse[]>([])
-    const [erro, setErro] = useState("")
 
     useEffect(() => {
-        const controller = new AbortController()
+        async function getCursos() {
+            try {
+                const response = await api.get<ListaCursosResponse>('/cursos')
 
-        api.get<ListaCursosResponse>('/cursos', { signal: controller.signal })
-            .then((response) => {
-                setCursos(response.data.cursos)
-            })
-            .catch((error) => {
-                if (!axios.isCancel(error)) {
-                    setErro("Erro ao carregar os cursos")
+                if (!ignore) {
+                    setCursos(response.data.cursos)
                 }
-            })
+            } catch {
+                if (!ignore) {
+                    toastError("Erro ao carregar os cursos")
+                }
+            }
+        }
+
+        let ignore = false
+        getCursos()
 
         return () => {
-            controller.abort()
+            ignore = true
         }
     }, [])
 
-    return { cursos, erro }
+    return { cursos }
 }

@@ -1,12 +1,15 @@
 import { useState } from "react"
 
-export function useFormulario<T>(valoresIniciais: T) {
+interface FormularioProps {
+    [campo: string]: string
+}
 
-    const [values, setValues] = useState<T>(valoresIniciais)
+export function useFormulario(valoresIniciais: FormularioProps) {
 
-    function handleChange(evento: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-        const { name, value } = evento.target
-        setValues({ ...values, [name]: value })
+    const [values, setValues] = useState(valoresIniciais)
+
+    function handleChange(campo: string, valor: string) {
+        setValues({ ...values, [campo]: valor })
     }
 
     function reset() {

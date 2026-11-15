@@ -49,12 +49,8 @@ export default function Home() {
         mutate.mutate(values)
     }
 
-    const alunosFiltrados = query.data?.alunos.filter((aluno) => {
-        const nomeConfere = aluno.nome.toLowerCase().includes(values.busca.toLowerCase())
-        const cursoConfere = values.curso === "" || aluno.curso === values.curso
-
-        return nomeConfere && cursoConfere
-    }) ?? []
+    const alunos = query.data ? query.data.alunos : []
+    const alunosFiltrados = alunos.filter((aluno) => aluno.nome.toLowerCase().includes(values.busca.toLowerCase()) && (values.curso === "" || aluno.curso === values.curso))
 
     return (
         <div>
@@ -68,15 +64,15 @@ export default function Home() {
                     <Clima />
                 </div>
 
-                <form className="home-filtro" onSubmit={(evento) => evento.preventDefault()}>
-                    <input type="text" name="busca" placeholder="Buscar aluno pelo nome" value={values.busca}
-                        onChange={handleChange} />
-                    <select name="curso" value={values.curso} onChange={handleChange}>
+                <div className="home-filtro">
+                    <input type="text" placeholder="Buscar aluno pelo nome" value={values.busca}
+                        onChange={(evento) => handleChange("busca", evento.target.value)} />
+                    <select value={values.curso} onChange={(evento) => handleChange("curso", evento.target.value)}>
                         <option value="">Todos os cursos</option>
                         {cursos.map((curso) => <option key={curso.id} value={curso.nome}>{curso.nome}</option>)}
                     </select>
                     <Botao texto="Limpar" variant="outlined" color="inherit" onClick={reset} />
-                </form>
+                </div>
 
                 <div className="home-content-list">
                     {query.isFetching ? (
