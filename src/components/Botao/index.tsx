@@ -1,3 +1,4 @@
+import "./styles.css"
 import Button from "@mui/material/Button"
 
 interface BotaoProps {
@@ -11,6 +12,6 @@ interface BotaoProps {
 
 export default function Botao({ texto, onClick, type = "button", color = "primary", variant = "contained", disabled = false }: BotaoProps) {
     return (
-        <Button type={type} color={color} variant={variant} disabled={disabled} onClick={onClick}>{texto}</Button>
+        <Button className="botao" type={type} color={color} variant={variant} disabled={disabled} onClick={onClick}>{texto}</Button>
     )
 }

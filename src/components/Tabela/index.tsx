@@ -1,3 +1,4 @@
+import "./styles.css"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import TableCell from "@mui/material/TableCell"
@@ -13,13 +14,11 @@ interface TabelaProps {
 
 export default function Tabela({ colunas, linhas }: TabelaProps) {
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className="tabela">
             <Table size="small">
                 <TableHead>
                     <TableRow>
-                        {colunas.map((coluna) => (
-                            <TableCell key={coluna} sx={{ fontWeight: 700, bgcolor: "primary.main", color: "primary.contrastText" }}>{coluna}</TableCell>
-                        ))}
+                        {colunas.map((coluna) => <TableCell key={coluna} className="tabela-coluna">{coluna}</TableCell>)}
                     </TableRow>
                 </TableHead>
                 <TableBody>

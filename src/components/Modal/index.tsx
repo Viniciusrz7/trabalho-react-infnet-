@@ -6,7 +6,6 @@ import { ThemeContextInstance } from "../../contexts/themeContextInstance"
 const customStyles = {
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 10,
     },
     content: {
         top: '50%',
@@ -20,9 +19,21 @@ const customStyles = {
 };
 
 const darkStyles = {
-    backgroundColor: '#2b2b36',
-    color: '#f1f1f1',
-    border: '1px solid #44444f',
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        maxHeight: '90vh',
+        backgroundColor: '#2b2b36',
+        color: '#f1f1f1',
+        border: '1px solid #44444f',
+    },
 };
 
 ExternalModal.setAppElement('#root')
@@ -37,10 +48,8 @@ export default function Modal({ closeModal, modalIsOpen, children }: ExternalMod
 
     const { theme } = useContext(ThemeContextInstance)
 
-    const content = theme === "dark" ? { ...customStyles.content, ...darkStyles } : customStyles.content
-
     return (
-        <ExternalModal onRequestClose={closeModal} isOpen={modalIsOpen} style={{ overlay: customStyles.overlay, content: content }}>
+        <ExternalModal onRequestClose={closeModal} isOpen={modalIsOpen} style={theme === "dark" ? darkStyles : customStyles}>
             {children}
         </ExternalModal>
     )
