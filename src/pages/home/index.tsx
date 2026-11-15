@@ -6,8 +6,11 @@ import { useAuth } from "../../hooks/useAuth"
 import { useFormulario } from "../../hooks/useFormulario"
 import { useCursos } from "../../hooks/useCursos"
 import { useState } from "react"
+import { useNavigate } from "react-router"
+import { FiEdit, FiEye } from "react-icons/fi"
 import Tabela from "../../components/Tabela"
 import Botao from "../../components/Botao"
+import BotaoAcao from "../../components/BotaoAcao"
 import Modal from "../../components/Modal"
 import AlunoForm from "../../components/AlunoForm"
 import type { FormAluno } from "../../components/AlunoForm"
@@ -22,6 +25,7 @@ export default function Home() {
     const { values, handleChange, reset } = useFormulario({ busca: "", curso: "" })
     const { cursos } = useCursos()
     const [isVisibleModalForm, setIsVisibleModalForm] = useState(false)
+    const navigate = useNavigate()
 
     const query = useQuery({ queryKey: ['alunos'], queryFn: getAlunos, staleTime: 1000 * 60 * 5, retry: false, refetchOnMount: 'always' })
 
@@ -70,10 +74,14 @@ export default function Home() {
                         <Alert severity="error">Erro ao carregar os alunos. Verifique se o backend está rodando.</Alert>
                     ) : alunosFiltrados.length ? (
                         <Tabela
-                            colunas={["Nome", "E-mail", "Telefone", "Curso", "Cidade"]}
+                            colunas={["Nome", "E-mail", "Telefone", "Curso", "Cidade", "Ações"]}
                             linhas={alunosFiltrados.map((aluno) => ({
                                 id: aluno.id,
-                                celulas: [aluno.nome, aluno.email, aluno.telefone, aluno.curso, `${aluno.cidade}/${aluno.uf}`]
+                                celulas: [aluno.nome, aluno.email, aluno.telefone, aluno.curso, `${aluno.cidade}/${aluno.uf}`,
+                                <div className="home-acoes">
+                                    <BotaoAcao titulo="Ver detalhes" onClick={() => navigate(`/aluno/${aluno.id}`)}><FiEye /></BotaoAcao>
+                                    <BotaoAcao titulo="Editar aluno" onClick={() => navigate(`/aluno/${aluno.id}/editar`)}><FiEdit /></BotaoAcao>
+                                </div>]
                             }))}
                         />
                     ) : (

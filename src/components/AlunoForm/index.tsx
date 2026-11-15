@@ -45,6 +45,12 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
     const cep = useWatch({ control, name: "cep" })
 
     useEffect(() => {
+        if (aluno && cursos.length) {
+            setValue("curso", aluno.curso)
+        }
+    }, [aluno, cursos, setValue])
+
+    useEffect(() => {
         const cepLimpo = (cep ?? "").replace(/\D/g, "")
 
         if (cepLimpo.length !== 8 || cep === aluno?.cep) {
