@@ -1,10 +1,6 @@
 import { useState } from "react"
 
-interface FormularioProps {
-    [campo: string]: string
-}
-
-export function useFormulario(valoresIniciais: FormularioProps) {
+export function useFormulario(valoresIniciais: Record<string, string>) {
 
     const [values, setValues] = useState(valoresIniciais)
 

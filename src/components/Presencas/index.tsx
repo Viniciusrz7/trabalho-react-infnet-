@@ -26,7 +26,7 @@ export default function Presencas() {
                             <BotaoAcao titulo="Remover presença" color="error" onClick={() => dispatch(removePresenca(item.id))}><FiUserX /></BotaoAcao>]
                         }))}
                     />
-                    <p className='presencas-total'>{`${items.length} presença(s) registrada(s)`}</p>
+                    <p className='presencas-total'>{items.length} presença(s) registrada(s)</p>
                     <Botao texto="Limpar lista" variant="outlined" color="error" onClick={() => dispatch(clearPresencas())} />
                 </>
             )}

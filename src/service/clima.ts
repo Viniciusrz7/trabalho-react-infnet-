@@ -9,7 +9,7 @@ export interface ClimaResponse {
     }
 }
 
-export const getClima = async () => {
+export async function getClima() {
     const response = await axios.get<ClimaResponse>('https://api.open-meteo.com/v1/forecast', {
         params: {
             latitude: -22.9035,

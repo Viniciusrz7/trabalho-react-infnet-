@@ -64,8 +64,8 @@ export default function Detalhes() {
                         <p className="detalhes-curso">{query.data?.curso}</p>
                         <p><strong>E-mail:</strong> {query.data?.email}</p>
                         <p><strong>Telefone:</strong> {query.data?.telefone}</p>
-                        <p><strong>Endereço:</strong> {`${query.data?.logradouro} - ${query.data?.bairro}`}</p>
-                        <p><strong>Cidade:</strong> {`${query.data?.cidade}/${query.data?.uf}`}</p>
+                        <p><strong>Endereço:</strong> {query.data?.logradouro} - {query.data?.bairro}</p>
+                        <p><strong>Cidade:</strong> {query.data?.cidade}/{query.data?.uf}</p>
                         <p><strong>CEP:</strong> {query.data?.cep}</p>
                     </div>
                 )}

@@ -9,7 +9,7 @@ interface BotaoAcaoProps {
     color?: "default" | "primary" | "error" | "success"
 }
 
-export default function BotaoAcao({ titulo, onClick, children, color = "default" }: BotaoAcaoProps) {
+export default function BotaoAcao({ titulo, onClick, children, color }: BotaoAcaoProps) {
     return (
         <Tooltip title={titulo}>
             <IconButton className="botao-acao" aria-label={titulo} color={color} onClick={onClick}>

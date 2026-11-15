@@ -9,7 +9,7 @@ export interface EnderecoResponse {
 
 let controller: AbortController
 
-export const getEndereco = async (cep: string) => {
+export async function getEndereco(cep: string) {
     if (controller) {
         controller.abort()
     }

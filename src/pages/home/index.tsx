@@ -86,7 +86,7 @@ export default function Home() {
                                 id: aluno.id,
                                 celulas: [aluno.nome, aluno.email, aluno.telefone, aluno.curso, `${aluno.cidade}/${aluno.uf}`,
                                 <div className="home-acoes">
-                                    {presencas.some((item) => item.id === aluno.id) ? (
+                                    {presencas.find((item) => item.id === aluno.id) ? (
                                         <BotaoAcao titulo="Remover presença" color="success" onClick={() => dispatch(removePresenca(aluno.id))}><FiUserCheck /></BotaoAcao>
                                     ) : (
                                         <BotaoAcao titulo="Marcar presença" onClick={() => dispatch(addPresenca({ id: aluno.id, nome: aluno.nome, curso: aluno.curso }))}><FiUserPlus /></BotaoAcao>
@@ -100,7 +100,7 @@ export default function Home() {
                         <p>Nenhum aluno encontrado</p>
                     )}
                 </div>
-                <p className="home-total">{`${alunosFiltrados.length} aluno(s) na lista`}</p>
+                <p className="home-total">{alunosFiltrados.length} aluno(s) na lista</p>
                 <button onClick={() => setIsVisibleModalForm(true)} className="home-botao-novo" title="Cadastrar aluno">+</button>
                 <Modal closeModal={() => setIsVisibleModalForm(false)} modalIsOpen={isVisibleModalForm}>
                     <h3 className="modal-titulo">Novo aluno</h3>

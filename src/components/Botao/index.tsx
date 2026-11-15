@@ -10,8 +10,8 @@ interface BotaoProps {
     disabled?: boolean
 }
 
-export default function Botao({ texto, onClick, type = "button", color = "primary", variant = "contained", disabled = false }: BotaoProps) {
+export default function Botao({ texto, onClick, type, color, variant, disabled }: BotaoProps) {
     return (
-        <Button className="botao" type={type} color={color} variant={variant} disabled={disabled} onClick={onClick}>{texto}</Button>
+        <Button className="botao" type={type} color={color} variant={variant ? variant : "contained"} disabled={disabled} onClick={onClick}>{texto}</Button>
     )
 }
