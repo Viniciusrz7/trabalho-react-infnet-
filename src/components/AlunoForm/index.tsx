@@ -57,11 +57,9 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
             return
         }
 
-        const controller = new AbortController()
-
         async function buscarEndereco() {
             try {
-                const endereco = await getEndereco(cepLimpo, controller.signal)
+                const endereco = await getEndereco(cepLimpo)
 
                 clearErrors("cep")
                 setValue("logradouro", endereco.logradouro, { shouldValidate: true })
@@ -76,10 +74,6 @@ export default function AlunoForm({ aluno, cursos, isPending, saveAluno }: Aluno
         }
 
         buscarEndereco()
-
-        return () => {
-            controller.abort()
-        }
     }, [cep, aluno, setValue, setError, clearErrors])
 
     return (

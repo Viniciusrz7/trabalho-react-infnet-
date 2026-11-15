@@ -7,17 +7,26 @@ export interface EnderecoResponse {
     erro?: string
 }
 
-const tempoLimite = () => {
-    return new Promise<Response>((_, reject) => {
-        setTimeout(() => reject(new Error("A consulta do CEP demorou demais, tente novamente")), 8000)
-    })
-}
+let controller: AbortController
 
-export const getEndereco = async (cep: string, signal: AbortSignal) => {
-    const response = await Promise.race([fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal: signal }), tempoLimite()])
+export const getEndereco = async (cep: string) => {
+    if (controller) {
+        controller.abort()
+    }
+
+    controller = new AbortController()
+    const signal = controller.signal
+
+    const response = await Promise.race([
+        fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal }),
+        new Promise<Response>((_, reject) => {
+            setTimeout(() => reject(new Error("A consulta do CEP demorou demais, tente novamente")), 8000)
+        }),
+    ])
+
     const endereco: EnderecoResponse = await response.json()
 
-    if (endereco.erro) {
+    if ("erro" in endereco) {
         throw new Error(`CEP ${cep} não encontrado`)
     }
 

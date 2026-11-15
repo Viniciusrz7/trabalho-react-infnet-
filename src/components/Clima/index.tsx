@@ -5,7 +5,7 @@ import { getClima } from "../../service/clima"
 
 export default function Clima() {
 
-    const query = useQuery({ queryKey: ['clima'], queryFn: ({ signal }) => getClima(signal), staleTime: 1000 * 60 * 5, refetchInterval: 1000 * 60 * 5, retry: 1 })
+    const query = useQuery({ queryKey: ['clima'], queryFn: getClima,staleTime: 1000 * 60 * 5, refetchInterval: 1000 * 60 * 5, retry: 1 })
 
     return (
         <div className="clima">

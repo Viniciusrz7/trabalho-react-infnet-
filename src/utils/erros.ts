@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const getMensagemErro = (error: unknown) => {
-    if (axios.isAxiosError<{ erro: string }>(error) && error.response) {
+    if (axios.isAxiosError(error) && error.response) {
         return error.response.data.erro
     }
 
