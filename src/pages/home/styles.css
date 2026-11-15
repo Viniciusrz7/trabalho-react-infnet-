@@ -28,6 +28,7 @@
 
 .home-total {
     margin-top: 12px;
+    margin-bottom: 40px;
     font-size: 0.85rem;
     color: var(--cor-suave);
 }

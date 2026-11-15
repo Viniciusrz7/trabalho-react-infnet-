@@ -7,7 +7,10 @@ import { useFormulario } from "../../hooks/useFormulario"
 import { useCursos } from "../../hooks/useCursos"
 import { useState } from "react"
 import { useNavigate } from "react-router"
-import { FiEdit, FiEye } from "react-icons/fi"
+import { useSelector, useDispatch } from "react-redux"
+import type { RootState } from "../../store"
+import { addPresenca, removePresenca } from "../../store/presencaSlice"
+import { FiEdit, FiEye, FiUserCheck, FiUserPlus } from "react-icons/fi"
 import Tabela from "../../components/Tabela"
 import Botao from "../../components/Botao"
 import BotaoAcao from "../../components/BotaoAcao"
@@ -26,6 +29,8 @@ export default function Home() {
     const { cursos } = useCursos()
     const [isVisibleModalForm, setIsVisibleModalForm] = useState(false)
     const navigate = useNavigate()
+    const presencas = useSelector((state: RootState) => state.presenca.items)
+    const dispatch = useDispatch()
 
     const query = useQuery({ queryKey: ['alunos'], queryFn: getAlunos, staleTime: 1000 * 60 * 5, retry: false, refetchOnMount: 'always' })
 
@@ -79,6 +84,11 @@ export default function Home() {
                                 id: aluno.id,
                                 celulas: [aluno.nome, aluno.email, aluno.telefone, aluno.curso, `${aluno.cidade}/${aluno.uf}`,
                                 <div className="home-acoes">
+                                    {presencas.some((item) => item.id === aluno.id) ? (
+                                        <BotaoAcao titulo="Remover presença" color="success" onClick={() => dispatch(removePresenca(aluno.id))}><FiUserCheck /></BotaoAcao>
+                                    ) : (
+                                        <BotaoAcao titulo="Marcar presença" onClick={() => dispatch(addPresenca({ id: aluno.id, nome: aluno.nome, curso: aluno.curso }))}><FiUserPlus /></BotaoAcao>
+                                    )}
                                     <BotaoAcao titulo="Ver detalhes" onClick={() => navigate(`/aluno/${aluno.id}`)}><FiEye /></BotaoAcao>
                                     <BotaoAcao titulo="Editar aluno" onClick={() => navigate(`/aluno/${aluno.id}/editar`)}><FiEdit /></BotaoAcao>
                                 </div>]

@@ -2,6 +2,8 @@ import Container from "../../templates/container"
 import { useNavigate, useParams } from "react-router"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import "./styles.css"
+import { useDispatch } from "react-redux"
+import { updatePresenca } from "../../store/presencaSlice"
 import Alert from "@mui/material/Alert"
 import AlunoForm from "../../components/AlunoForm"
 import type { FormAluno } from "../../components/AlunoForm"
@@ -16,14 +18,16 @@ export default function Editar() {
     const params = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
+    const dispatch = useDispatch()
     const { cursos } = useCursos()
     const id = Number(params.id)
 
     const query = useQuery({ queryKey: ['aluno', id], queryFn: () => getAlunoDetalhe(id), staleTime: 1000 * 60 * 5, retry: false })
 
     const mutate = useMutation({
-        mutationFn: putAluno, onSuccess: () => {
+        mutationFn: putAluno, onSuccess: ({ nome, curso }) => {
             toastSuccess("Aluno atualizado com sucesso")
+            dispatch(updatePresenca({ id, nome, curso }))
             queryClient.invalidateQueries({ queryKey: ['aluno', id] })
             queryClient.invalidateQueries({ queryKey: ['alunos'] })
             navigate(`/aluno/${id}`)

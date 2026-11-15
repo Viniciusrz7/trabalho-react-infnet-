@@ -4,6 +4,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import "./styles.css"
 import { FiEdit, FiTrash } from "react-icons/fi"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { removePresenca } from "../../store/presencaSlice"
 import Modal from "../../components/Modal"
 import Botao from "../../components/Botao"
 import BotaoAcao from "../../components/BotaoAcao"
@@ -18,6 +20,7 @@ export default function Detalhes() {
     const params = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
+    const dispatch = useDispatch()
     const id = Number(params.id)
 
     function openModal() {
@@ -32,6 +35,7 @@ export default function Detalhes() {
         onSuccess: () => {
             toastSuccess("Aluno excluído com sucesso")
             closeModal()
+            dispatch(removePresenca(id))
             queryClient.invalidateQueries({ queryKey: ['alunos'] })
             navigate("/home")
         }, onError: (error) => {
