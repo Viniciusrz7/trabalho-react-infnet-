@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ToastContainer } from 'react-toastify'
 import ThemeContext from './contexts/themeContext.tsx'
+import PrivateRoute from './components/PrivateRoute/index.tsx'
 
 const queryClient = new QueryClient()
 
@@ -15,7 +16,9 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
         </Routes>
         <ToastContainer position="top-right" autoClose={3000} />
       </BrowserRouter>
